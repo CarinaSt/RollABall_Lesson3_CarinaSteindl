@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Diagnostics;
+using TMPro; 
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,14 +19,19 @@ public class PlayerController : MonoBehaviour
     private int m_collectablesTotalCount, m_collectablesCounter;
 
     private Stopwatch m_stopWatch;
-    
+
+    public TextMeshProUGUI scoreText;
+
     private void Start()
     {
         m_playerRigidbody = GetComponent<Rigidbody>();
 
         m_collectablesTotalCount = m_collectablesCounter = GameObject.FindGameObjectsWithTag("Collectable").Length;
 
+        scoreText.text = m_collectablesTotalCount.ToString();
+
         m_stopWatch = Stopwatch.StartNew();
+
     }
 
     private void OnMove(InputValue inputValue)
@@ -50,6 +56,7 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
 
             m_collectablesCounter--;
+            scoreText.text = m_collectablesCounter.ToString();
             if (m_collectablesCounter == 0)
             {
                 UnityEngine.Debug.Log("You Win");
