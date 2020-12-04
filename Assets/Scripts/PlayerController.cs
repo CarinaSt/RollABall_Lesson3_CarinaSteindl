@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
-    private void Start()
+
+private void Start()
     {
         m_playerRigidbody = GetComponent<Rigidbody>();
 
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnMove(InputValue inputValue)
+private void OnMove(InputValue inputValue)
     {
         Vector2 movementVector = inputValue.Get<Vector2>();
 
@@ -42,14 +43,15 @@ public class PlayerController : MonoBehaviour
         m_movementY = movementVector.y;
     }
 
-    private void FixedUpdate()
+private void FixedUpdate()
     {
+
         Vector3 movement = new Vector3(m_movementX, 0f, m_movementY);
-        
+
         m_playerRigidbody.AddForce(movement * m_speed);
     }
 
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Collectable"))
         {
